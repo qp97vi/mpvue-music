@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/music/main",
+    "pages/counter/main",
+    "pages/me/main",
+    "pages/songlist/main",
+    "pages/play/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#000",
+    "backgroundColor": "#fafafa",
+    "selectedColor": "#d81e06",
+    "borderStyle": "white",
+
+    "list": [{
+      "text": "发现音乐",
+      "pagePath": "pages/index/main",
+      "iconPath": "static/tabs/musiccloud.png",
+      "selectedIconPath": "static/tabs/select-musiccloud.png"
+    }, {
+      "text": "我的音乐",
+      "pagePath": "pages/music/main",
+      "iconPath": "static/tabs/yinle.png",
+      "selectedIconPath": "static/tabs/select-yinle.png"
+    },{
+      "text": "我的",
+      "pagePath": "pages/me/main",
+      "iconPath": "static/tabs/wode.png",
+      "selectedIconPath": "static/tabs/select-wode.png"
+    }],
+
+    "items": [{
+      "name": "发现音乐",
+      "pagePath": "pages/index/main",
+      "icon": "static/tabs/musiccloud.png",
+      "activeIcon": "static/tabs/select-musiccloud.png"
+    }, {
+      "name": "我的音乐",
+      "pagePath": "pages/music/main",
+      "icon": "static/tabs/yinle.png",
+      "activeIcon": "static/tabs/select-yinle.png"
+    }, {
+      "name": "我的",
+      "pagePath": "pages/me/main",
+      "icon": "static/tabs/wode.png",
+      "activeIcon": "static/tabs/select-wode.png"
+    }],
+    "position": "bottom"
+  }
+}

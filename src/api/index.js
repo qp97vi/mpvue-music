@@ -59,3 +59,8 @@ export async function getRecommend(){
 export async function getRefresh(){
   return request(`/user/detail?uid=380514234`)
 }
+
+/*热门搜索*/
+export async function getHotSearch(){
+  return request(`/search/hot/detail`)
+}

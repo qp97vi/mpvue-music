@@ -4,6 +4,11 @@
       <banner :banner="banner"></banner>
       <song-sheet :result='result'></song-sheet>
     </view>
+  
+     <div class="search" @click="search">
+        <span class="iconfont iconsousuo"></span>
+     </div>
+   
   </div>
 </template>
 
@@ -53,6 +58,11 @@ export default {
               console.log(res.result)  
             }
         })
+    },
+    search(){
+       wx.navigateTo({
+                url: '../search/main?',
+            })
     }
     
   },
@@ -60,5 +70,17 @@ export default {
 </script>
 
 <style scoped>
-
+.search{
+  background: #B22222;
+  border-radius: 50%;
+  padding: 20rpx 20rpx;
+  box-shadow: -2rpx 0 20rpx #e8e8e8;
+  width: 60rpx;
+  height: 60rpx;
+}
+.iconsousuo{
+  font-size: 60rpx;
+  line-height: 60rpx;
+  color: #ffffff;
+}
 </style>

@@ -60,6 +60,11 @@ export async function getRefresh(){
   return request(`/user/detail?uid=380514234`)
 }
 
+/*搜索*/
+export async function getSearch(name){
+  return request(`/search?keywords=${name}`)
+}
+
 /*热门搜索*/
 export async function getHotSearch(){
   return request(`/search/hot/detail`)

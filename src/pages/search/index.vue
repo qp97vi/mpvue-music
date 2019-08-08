@@ -22,20 +22,38 @@
         </div>
         <!-- 删除弹框 -->
         <!-- div. -->
+        <div class="search-list">
+            <ul>
+                <li v-for="(item,inx) in songlist" :key="inx">
+                    <span>{{item.name}}</span>
+                    <em>{{item.artists[0].name}}</em>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 <script>
-import {getHotSearch} from '../../api/index'
+import {getHotSearch,getSearch} from '../../api/index'
 export default {
     name:'search',
     data() {
         return {
-           singer:'',
+           singer:undefined,
            hotSearch:'',
            history:'',
+           songlist:[]
         }
     },
-    
+    watch: {
+        singer(val){
+            if (val) {
+               this._getSearch(val) 
+            } else {
+                this.songlist = []
+            }
+           
+        }
+    },
     created() {
         this._getHotSearch()
     },
@@ -50,6 +68,13 @@ export default {
         close(){
            wx.navigateBack({
                 delta: 1
+            })
+        },
+        _getSearch(val){
+            getSearch(val).then(res=>{
+                if(res.code===200){
+                    this.songlist=res.result.songs
+                }
             })
         },
         _getHotSearch(){
@@ -68,7 +93,8 @@ export default {
                     return false;
                 }
             }
-            history.push(this.singer)
+            history.unshift(this.singer)
+            
             wx.setStorageSync('history', history)
             this.$nextTick(function(){
                   this.history=wx.getStorageSync('history') || []
@@ -176,5 +202,18 @@ export default {
 }
 .history-title span{
     color: red;
+}
+.search-list{
+    background: #F8F8FF;
+    position: absolute;
+    top: 100rpx;
+    width: 100%;
+}
+.search-list li{
+    margin: 0 34rpx;
+    
+}
+.search-list li+li{
+    border-top: 1px solid #dddddd;
 }
 </style>

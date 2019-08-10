@@ -17,14 +17,14 @@
         <div class="search-history">
             <div class="history-title"><span>搜索历史</span> <i class="iconfont iconshanchu" @click="del"></i></div>
             <div>
-                <em v-for="(item,ind) in history":key="ind" >{{item}}</em>
+                <em v-for="(item,ind) in history":key="ind" @click="clickSeach(item)">{{item}}</em>
             </div>
         </div>
         <!-- 删除弹框 -->
         <!-- div. -->
         <div class="search-list">
             <ul>
-                <li v-for="(item,inx) in songlist" :key="inx">
+                <li v-for="(item,inx) in songlist" :key="inx" @click="bofang(item.id)">
                     <span>{{item.name}}</span>
                     <em>{{item.artists[0].name}}</em>
                 </li>
@@ -68,6 +68,17 @@ export default {
         close(){
            wx.navigateBack({
                 delta: 1
+            })
+        },
+        clickSeach(item){
+            // console.log(item);
+            this.singer=item;
+            
+        },
+        bofang(id){
+            console.log(id);
+            wx.navigateTo({
+                url: '../play/main?id='+id,
             })
         },
         _getSearch(val){

@@ -48,7 +48,11 @@ export default {
             return store.state.playlist.tracks;
         }
     },
+    created() {
+        
+    },
     mounted() {
+        
        this.songUrl.forEach((element,index) => {
             if(this.$root.$mp.query.id==element.id){ 
             this._getSongUrl(this.songUrl[index].id)
@@ -57,22 +61,31 @@ export default {
            console.log(this.index)
           }
        }); 
+       if(this.$root.$mp.query.id){
+           this._getSongUrl(this.$root.$mp.query.id)
+            this._getSongUrlDetail(this.$root.$mp.query.id)
+       }
     },
     methods: {
          nextSong(){
             // console.log(this.videoSrc)
-            if(this.songUrl.length-1==this.index){
-                return
+            if(this.songUrl.length<=1){
+
             }else{
-                const nextSong = this.songUrl.slice(this.index +1, this.index + 2)[0];
-                this._getSongUrl(nextSong.id)
-                this._getSongUrlDetail(nextSong.id)
-                this.index=this.index+1;
-              
-                // const val=this.videoSrc
-                // console.log(val)
-                // this.videoSrc(val)
-            }  
+                if(this.songUrl.length-1==this.index){
+                    return
+                }else{
+                    const nextSong = this.songUrl.slice(this.index +1, this.index + 2)[0];
+                    this._getSongUrl(nextSong.id)
+                    this._getSongUrlDetail(nextSong.id)
+                    this.index=this.index+1;
+                
+                    // const val=this.videoSrc
+                    // console.log(val)
+                    // this.videoSrc(val)
+                }  
+            }
+            
         },
          prevSong(){
             if(this.index==0){

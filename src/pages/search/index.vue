@@ -142,7 +142,6 @@ export default {
             // }, 2000)
         }
     },
-    
 }
 </script>
 <style scoped>

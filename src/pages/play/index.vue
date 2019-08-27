@@ -5,11 +5,11 @@
                <img :src="picUrl" alt="">
            </div>
        </div>
-       <div class="middle">
-           <div class="playBorder" v-if="!this.picUrl">
+       <div class="middle" >
+           <div class="playBorder" :class="isplay?'playBorder-animation':'paused'" v-if="!this.picUrl">
                
            </div>
-           <div class="play">
+           <div class="imgBox" :class="isplay?'play':'paused'" >
                 <img :src="picUrl" alt="">
             </div>
        </div>
@@ -19,7 +19,7 @@
        </play>
        <div class="controls">
             <span class="iconfont iconshangyishou" @click="prevSong()"></span>
-             <span class="iconfont iconcrm17" @click="suspend()"></span>
+             <span class="iconfont" :class="isplay?'iconcrm17':'iconbofang'" @click="suspend(isplay)"></span>
             <span class="iconfont iconxiayishou" @click="nextSong()"></span>
        </div>
      
@@ -38,6 +38,9 @@ export default {
             name:'',
             author:'',
             index:'',
+            
+            isplay:true,//判断是否播放
+            
         }
     },
     components:{
@@ -48,9 +51,7 @@ export default {
             return store.state.playlist.tracks;
         }
     },
-    created() {
-        
-    },
+   
     mounted() {
         
        this.songUrl.forEach((element,index) => {
@@ -79,10 +80,6 @@ export default {
                     this._getSongUrl(nextSong.id)
                     this._getSongUrlDetail(nextSong.id)
                     this.index=this.index+1;
-                
-                    // const val=this.videoSrc
-                    // console.log(val)
-                    // this.videoSrc(val)
                 }  
             }
             
@@ -99,10 +96,13 @@ export default {
            
             } 
         },
-        suspend(){
+        suspend(isplay){
             console.log(1)
             // console.log(this.$refs.myplay.toogle)
             this.$refs.myplay.toogle()
+            this.isplay=!this.isplay;
+            
+            
            
         },
         _getSongUrl(songUrl){
@@ -156,16 +156,22 @@ export default {
     transform: translate(-50%,-50%);
  
 }
-.play{
-      border: 14rpx solid hsla(0, 0%, 100%, 0.5);
-      animation: rotate 15s linear infinite;
-       width: 480rpx;
+.imgBox{
+     border: 14rpx solid hsla(0, 0%, 100%, 0.5);
+      width: 480rpx;
     height: 480rpx;
-    border-radius: 50%;
-    
-  
+    border-radius: 50%;  
 }
-.play img{
+.play{
+     
+      animation: rotate 15s linear infinite;
+      
+}
+
+.paused{
+    animation-play-state: paused;
+}
+.imgBox img{
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -177,6 +183,9 @@ export default {
     transform: translate(-50%,-50%);
     border-radius: 50%;
 
+    
+}
+.playBorder-animation{
     animation: moveCircle 6s linear infinite;
 }
 .controls{

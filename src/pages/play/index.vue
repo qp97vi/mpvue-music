@@ -14,7 +14,6 @@
             </div>
        </div>
        <play :videoSrc="videoSrc" ref="myplay">
-            
           
        </play>
        <div class="controls">
@@ -80,6 +79,7 @@ export default {
                     this._getSongUrl(nextSong.id)
                     this._getSongUrlDetail(nextSong.id)
                     this.index=this.index+1;
+                    this.isplay=true;
                 }  
             }
             
@@ -93,17 +93,16 @@ export default {
             this._getSongUrlDetail(nextSong.id)
             this.index=this.index-1; 
             console.log(this.videoSrc)
-           
+            this.isplay=true;
             } 
         },
-        suspend(isplay){
-            console.log(1)
-            // console.log(this.$refs.myplay.toogle)
-            this.$refs.myplay.toogle()
+        suspend(isplay){           
+           if(isplay){
+              this.$refs.myplay.pause() 
+           }else{
+             this.$refs.myplay.play()  
+           }
             this.isplay=!this.isplay;
-            
-            
-           
         },
         _getSongUrl(songUrl){
             getSongUrl(songUrl).then(res=>{

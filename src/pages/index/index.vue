@@ -77,6 +77,9 @@ export default {
   box-shadow: -2rpx 0 20rpx #e8e8e8;
   width: 60rpx;
   height: 60rpx;
+  position: absolute;
+  right:28rpx;
+bottom:268rpx
 }
 .iconsousuo{
   font-size: 60rpx;

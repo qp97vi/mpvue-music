@@ -10,13 +10,7 @@
       {{this.src}} -->
       <div style="background:red;height:30px">{{videoSrc}}</div>
       {{videoSrc}}
-      <div @click="toogle()"></div>
-        <!-- <div class="controls"> -->
-          <slot></slot>
-        <!-- <span class="iconfont iconcrm17" @click="play()"></span> -->
-         
-         
-      <!-- </div> -->
+      
     </div>
 </template>
 <script>
@@ -132,14 +126,16 @@ export default {
         //     })
              
         // },
-
+        play(){
+            this.myAudio.play()
+        },
+        pause(){
+            this.myAudio.pause()
+        },
        childMethod() {
         this.$parent.nextSong();
       },
-       toogle(){
-           
-           console.log(33333)
-       },
+      
         _getSongUrl(songUrl){
             getSongUrl(songUrl).then(res=>{
                if(res.code===200){
@@ -169,54 +165,13 @@ export default {
             this._getSongUrlDetail(this.songUrl[index].id)
             
            this.index=index;
-        //    this.$emit('picurl',this.picUrl) 
-        //      this.$emit("audiosrc",this.audioSrc)
            console.log(this.index)
           }
-       }); 
-       
-        //  this.song(this.songurl)
-        // for(var i=0;i<this.songUrl.length;i++){
-        //   if(this.$root.$mp.query.id==this.songUrl[i].id){
-        //        this._getSongUrl(this.songUrl[i].id)
-        //         this._getSongUrlDetail(this.songUrl[i].id)
-        //        return 
-        //   }
-         
-        // }
-     
-       
-        // // 创建一个audio
-    
-        
+       });  
          
     },
     
-    // mounted() {
-    //     this.$refs.audio.play()
-    //     this.audioCtx = wx.createAudioContext('myAudio')
-       
-    //     //  this.audioCtx.play()
-        
-    // console.log(this.songUrl)
-    // // 创建一个audio
-    // const myAudio = wx.createInnerAudioContext();
-    
-    // // 设置audio的资源地址
-    // //  'http://m10.music.126.net/20190729171915/376bcc1ab531ed1ec778a60911b00b21/ymusic/78a4/bd4a/4931/dfdee6748dd9e52904d21423c3b0584b.mp3';  
-    // myAudio.src =
-    // // 监听音频进入可以播放状态的事件
-    // myAudio.onCanplay(()=> {
-    //     myAudio.play()
-    //   // 必须。可以当做是初始化时长
-    //   myAudio.duration;
-    //   // 必须。不然也获取不到时长
-    //   setTimeout(() => {
-    //     console.log(myAudio.duration); // 401.475918
-    //   }, 1000)
-    // })  
 
-    // },
 }
 </script>
 <style scoped>

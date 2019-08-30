@@ -1,11 +1,16 @@
 <template>
-    <div>
+    <div class="bgBox">
        <div class="bg">
            <div class="background">
                <img :src="picUrl" alt="">
            </div>
+
+       </div>
+       <div class="songName">
+          {{name}} 
        </div>
        <div class="middle" >
+            <div v-if="isshow" class="shadow">需要会员播放</div>
            <div class="playBorder" :class="isplay?'playBorder-animation':'paused'" v-if="!this.picUrl">
                
            </div>
@@ -16,12 +21,13 @@
        <play :videoSrc="videoSrc" ref="myplay">
           
        </play>
+       
        <div class="controls">
             <span class="iconfont iconshangyishou" @click="prevSong()"></span>
              <span class="iconfont" :class="isplay?'iconcrm17':'iconbofang'" @click="suspend(isplay)"></span>
             <span class="iconfont iconxiayishou" @click="nextSong()"></span>
        </div>
-     
+        
     </div>
 </template>
 <script>
@@ -37,8 +43,10 @@ export default {
             name:'',
             author:'',
             index:'',
-            
+            num:50,
+            progress:30,
             isplay:true,//判断是否播放
+            isshow:false,
             
         }
     },
@@ -48,7 +56,8 @@ export default {
     computed: {
         songUrl(){
             return store.state.playlist.tracks;
-        }
+        },
+        
     },
    
     mounted() {
@@ -80,6 +89,7 @@ export default {
                     this._getSongUrlDetail(nextSong.id)
                     this.index=this.index+1;
                     this.isplay=true;
+                    this.isshow=false;
                 }  
             }
             
@@ -94,9 +104,12 @@ export default {
             this.index=this.index-1; 
             console.log(this.videoSrc)
             this.isplay=true;
+            this.isshow=false;
             } 
         },
-        suspend(isplay){           
+        suspend(isplay){
+            
+                       
            if(isplay){
               this.$refs.myplay.pause() 
            }else{
@@ -107,7 +120,18 @@ export default {
         _getSongUrl(songUrl){
             getSongUrl(songUrl).then(res=>{
                if(res.code===200){
-                  this.videoSrc=res.data[0].url
+                   this.videoSrc=res.data[0].url
+                   if(this.videoSrc==null){
+                      var _this=this;
+                      _this.isshow=true;
+                       _this.isplay=false;
+                      setTimeout(function(){
+                          _this.isshow=false;
+                          _this.isplay=true;
+                          _this.nextSong()//需要会员权限
+                      },5000) 
+                   }
+                  
                   
                }
             })
@@ -128,6 +152,8 @@ export default {
 }
 </script>
 <style scoped>
+
+
 .bg{
     position: absolute;
     width: 100%;
@@ -239,6 +265,17 @@ export default {
         height: 0px;
         border: 1px solid rgba(255, 255, 255, 0)
     }
+}
+.shadow{
+    position:absolute;
+    top:50%;
+    left:50%;
+    z-index:10;
+    transform:translate(-50%,-50%);
+}
+.songName{
+    text-align: center;
+    line-height: 40px;
 }
 
 </style>

@@ -4,7 +4,6 @@
            <div class="background">
                <img :src="picUrl" alt="">
            </div>
-
        </div>
        <div class="songName">
           {{name}} 
@@ -46,7 +45,7 @@ export default {
             num:50,
             progress:30,
             isplay:true,//判断是否播放
-            isshow:false,
+            isshow:false,//提示信息是否播放
             
         }
     },

@@ -105,6 +105,11 @@ export default {
     z-index: 9;
 
 }
+.progressBox em{
+    flex: 1;
+    text-align: center;
+    height: 21px;
+}
 .controls{
     display: flex;
     flex-direction: row;

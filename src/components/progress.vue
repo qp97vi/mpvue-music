@@ -26,7 +26,7 @@ export default {
 <style scoped>
 .progressContainer{
     height: 18rpx;
-    flex: 1;
+    flex: 6;
     border-radius: 10px;
     background-color: #ddd;
     margin-left: 2%;

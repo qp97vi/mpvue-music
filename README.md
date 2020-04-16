@@ -24,7 +24,7 @@ npm dev:swan
 npm dev:tt
 npm dev:my
 
-# 指定平台的打包构建
+# 指定平台的打包构建   
 测试
 npm build:wx
 npm build:swan
